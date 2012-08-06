@@ -3,12 +3,11 @@
 # from corpus project:
 # http://nlp.pwr.wroc.pl/redmine/projects/corpus2/wiki
 
-data=/usr/kuba/NKJP-10
-in=$data/xml/folds
-out=$data/no-maca-guesser/folds
+nkjp=/usr/kuba/NKJP-10
 
 for i in "01" "02" "03" "04" "05" "06" "07" "08" "09" "10"
 do
     echo $i
-    corpus-get -o plain -t $in/test$i.xml > $out/test$i.plain
+    cp $nkjp/xml/folds/test$i.txt $nkjp/no-maca-guesser/folds/test$i.txt
+    corpus-get -o plain -t $nkjp/xml/folds/test$i.xml > $nkjp/no-maca-guesser/folds/test$i.plain
 done
