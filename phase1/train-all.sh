@@ -34,4 +34,5 @@ do
 
     # Delete the training material, we will not need it again.
     rm $data/train/train$i.plain
+    rm $data/train-guess/train$i.plain
 done
