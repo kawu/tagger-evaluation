@@ -1,7 +1,9 @@
-data=/usr/kuba/NKJP-10/no-maca-guesser
-train_guesser=...
-guess=...
-tagger=...
+root=/mnt/storage/kuba/tagger_data
+data=$root/no-maca-guesser
+train_guesser=/home/kuba/praca/kawu/crf-guesser/examples/Train
+guess=/home/kuba/praca/kawu/crf-guesser/examples/Guess
+tagger=/home/kuba/praca/kawu/tagger/tagger
+weak_lb=/home/kuba/praca/kawu/morphosyntax/examples/WeakLB
 
 for i in "01" "02" "03" "04" "05" "06" "07" "08" "09" "10"
 do
@@ -25,6 +27,10 @@ do
     # Train tagger and tag eval file.
     $tagger train ../nkjp-tagset.cfg $data/train-guess/train$i.plain -i 20 -b 50 -o $data/taggers/tagger$i.bin -w 4 +RTS -N4
     $tagger tag $data/taggers/tagger$i.bin < $data/reana-guess/test$i.plain > $data/reana-tagged/test$i.plain
+
+    echo "\nSTATS\n"
+    $weak_lb ../nkjp-tagset.cfg $data/folds/test$i.plain $data/reana-tagged/test$i.plain
+    echo "\nEND STATS\n"
 
     # Delete the training material, we will not need it again.
     rm $data/train/train$i.plain
