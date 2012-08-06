@@ -15,7 +15,7 @@ do
     do
 	if [ $i != $j ]; then
 	    echo "> "$j
-	    cat $data/reana-disamb/test$i.plain >> $data/train/train$i.plain
+	    cat $data/reana-disamb/test$j.plain >> $data/train/train$j.plain
 	fi
     done
 
