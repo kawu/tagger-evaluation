@@ -28,9 +28,9 @@ do
     $tagger train ../nkjp-tagset.cfg $data/train-guess/train$i.plain -i 20 -b 50 -o $data/taggers/tagger$i.bin -w 4 +RTS -N4
     $tagger tag $data/taggers/tagger$i.bin < $data/reana-guess/test$i.plain > $data/reana-tagged/test$i.plain
 
-    echo "\nSTATS\n"
+    echo -e "\nSTATS\n"
     $weak_lb ../nkjp-tagset.cfg $data/folds/test$i.plain $data/reana-tagged/test$i.plain
-    echo "\nEND STATS\n"
+    echo -e "\nEND STATS\n"
 
     # Delete the training material, we will not need it again.
     rm $data/train/train$i.plain
